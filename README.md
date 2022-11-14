@@ -15,7 +15,7 @@
 - PHP（Laravel）
 
 ## テーブル設計
-<img width="672" alt="スクリーンショット 2022-11-14 1 20 11" src="https://user-images.githubusercontent.com/112786056/201532355-914a5ad9-45f9-4858-87de-bf1ed8192ae1.png">
+<img width="676" alt="スクリーンショット 2022-11-14 19 33 28" src="https://user-images.githubusercontent.com/112786056/201638360-427551a5-8fd8-48f3-9de5-75342199a5a9.png">
 
 ## ER図
 ![index](https://user-images.githubusercontent.com/112786056/201638007-aabe78c2-0207-4bcf-beec-b4072e7850f0.png)
