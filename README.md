@@ -18,4 +18,4 @@
 <img width="672" alt="スクリーンショット 2022-11-14 1 20 11" src="https://user-images.githubusercontent.com/112786056/201532355-914a5ad9-45f9-4858-87de-bf1ed8192ae1.png">
 
 ## ER図
-![index](https://user-images.githubusercontent.com/112786056/201632853-011d86c0-d011-4ab7-8f74-ad1acc187c4e.png)
+![index](https://user-images.githubusercontent.com/112786056/201638007-aabe78c2-0207-4bcf-beec-b4072e7850f0.png)
