@@ -8,7 +8,7 @@ use App\Http\Requests\TodoRequest;
 
 class TodoController extends Controller
 {
-    public function list()
+    public function index()
     {
         $tododb = Todo::all();
         return view('index', ['todos' => $tododb]);

@@ -13,7 +13,7 @@ class TodoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class TodoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id' => 'max:20',
+            'contents' => 'required | max:20',
+            'tag_id' => 'required'
+        ];
+    }
+    public function messages()
+    {
+        return [
+            "contents.required" => "テキストは必須項目です。",
+            "contents.max" => "20文字以内で入力してください",
         ];
     }
 }
