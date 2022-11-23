@@ -21,6 +21,53 @@
     overflow: hidden;
   }
 
+  .todo {
+    display: inline-block;
+  }
+
+  .header {
+    width: 100%;
+  }
+
+  .title {
+    font-style: normal;
+    font-size: 30px;
+    font-weight: bold;
+    display: inline-block;
+    width: 28%;
+  }
+
+  .login {
+    display: inline-block;
+    width: 70%;
+    text-align: right;
+  }
+
+  .login_name {
+    display: inline-block;
+    width: 40%;
+    text-align: right;
+  }
+
+  .logout {
+    display: inline-block;
+    width: 40%;
+  }
+
+  button.logout {
+    border-style: solid;
+    padding: 8px 20px;
+    background: none;
+    color: #ff0000;
+    border-radius: 5px;
+    border-color: #ff0000;
+  }
+
+  button.logout:hover {
+    background-color: #ff0000;
+    color: #fff;
+  }
+
   input.todo_create {
     width: 450px;
     height: 30px;
@@ -32,7 +79,6 @@
   button.create {
     margin-left: 50px;
     border-style: solid;
-    border-style: thin;
     padding: 8px 20px;
     background: none;
     color: #ff00ff;
@@ -60,7 +106,6 @@
 
   button.update {
     border-style: solid;
-    border-style: thin;
     padding: 8px 20px;
     background: none;
     color: #ffbf1c;
@@ -75,7 +120,6 @@
 
   button.delete {
     border-style: solid;
-    border-style: thin;
     padding: 8px 20px;
     background: none;
     color: #1cffbb;
@@ -105,17 +149,27 @@
 
   <div class="card">
     <div class="todo">
-      <h2>Todo List</h2>
-      @if (Auth::check())
-      <p>「{{$user->name}}」でログイン中</p>
-      @else
-      <p>
-        ログインしてください（<a href="/login">ログイン</a>｜<a href="/register">登録</a>）
-      </p>
-      @endif
-      <form action="/login" method="post">
-        <button class="logout" type="submit">ログアウト</button>
-      </form>
+
+      <div class="header">
+        <p class="title">Todo List</p>
+        <div class="login">
+          <div class="login_name">
+            @if (Auth::check())
+            <p>「{{$user->name}}」でログイン中</p>
+            @else
+            <p>
+              ログインしてください（<a href="/login">ログイン</a>｜<a href="/register">登録</a>）
+            </p>
+            @endif
+          </div>
+          <div class="logout">
+            <form action="/login" method="post">
+              <button class="logout" type="submit">ログアウト</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
       <form action="/create" method="post">
         @csrf
         <input name="contents" type="text" class="todo_create">
