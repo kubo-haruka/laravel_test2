@@ -18,7 +18,7 @@ class TodoController extends Controller
         $tagdb = Tag::all();
         $userdb = User::all();
         $index = ['todos' => $tododb, 'users' => $userdb, 'tags' => $tagdb];
-        return view('/index', ['todos' => $index]);
+        return view('/index', ['index' => $index]);
     }
 
     public function create(TodoRequest $request)
