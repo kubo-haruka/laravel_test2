@@ -15,9 +15,9 @@ class CreateTodosTable extends Migration
     {
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
-            $table->int('users_id')->unique();
-            $table->int('tags_id')->unique();
-            $table->varchar('contents', 20);
+            $table->integer('users_id')->unique();
+            $table->integer('tags_id')->unique();
+            $table->string('contents', 20);
             $table->timestamps();
         });
     }
