@@ -12,7 +12,7 @@ class TodoController extends Controller
     public function index()
     {
         $todosdb = Todo::all();
-        $param = ['tag' => $todosdb, 'tag' => $tagdb, 'user' => $userdb];
+        $param = ['todo' => $todosdb, 'tag' => $tagdb, 'user' => $userdb];
         return view('index', ['todos' => $param]);
     }
 
