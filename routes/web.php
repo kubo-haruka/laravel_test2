@@ -20,6 +20,7 @@ Route::post('/update/{id}', [TodoController::class, 'update'])->name('todo.updat
 Route::post('/delete/{id}', [TodoController::class, 'delete'])->name('todo.delete');
 Route::post('/search/{todos_id}{tags_id}', [TodoController::class, 'search']);
 Route::post('/find', [TodoController::class, 'find']);
+Route::post('/login', [TodoController::class, 'login']);
 
 Route::get('/', function () {
     return view('welcome');

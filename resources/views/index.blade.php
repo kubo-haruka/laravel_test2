@@ -95,16 +95,6 @@
 </style>
 
 <body>
-  // ログインチェック
-  @if (Auth::check())
-  <p>ログイン中ユーザー: {{$users->name . ' メール' . $users->email . ''}}</p>
-  @else
-  <p>
-    ログインしてください（<a href="/login">ログイン</a>｜<a href="/register">登録</a>）
-  </p>
-  @endif
-
-  // エラー
   @if (count($errors) > 0)
   <ul>
     @foreach ($errors->all() as $error)
@@ -116,6 +106,16 @@
   <div class="card">
     <div class="todo">
       <h2>Todo List</h2>
+      @if (Auth::check())
+      <p>「{{$user->name}}」でログイン中</p>
+      @else
+      <p>
+        ログインしてください（<a href="/login">ログイン</a>｜<a href="/register">登録</a>）
+      </p>
+      @endif
+      <form action="/login" method="post">
+        <button class="logout" type="submit">ログアウト</button>
+      </form>
       <form action="/create" method="post">
         @csrf
         <input name="contents" type="text" class="todo_create">
