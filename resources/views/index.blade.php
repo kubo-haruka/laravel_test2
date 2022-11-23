@@ -95,6 +95,15 @@
 </style>
 
 <body>
+  // ログインチェック
+  @if (Auth::check())
+  <p>ログイン中ユーザー: {{$user->name . ' メール' . $user->email . ''}}</p>
+  @else
+  <p>
+    ログインしてください（<a href="/login">ログイン</a>｜<a href="/register">登録</a>）
+  </p>
+  @endif
+
   // エラー
   @if (count($errors) > 0)
   <ul>

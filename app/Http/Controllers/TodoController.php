@@ -5,22 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Todo;
 use App\Http\Requests\TodoRequest;
+use App\Models\Tag;
+use App\Models\User;
+use Illuminate\Cache\TagSet;
 use Illuminate\Support\Facades\Auth;
 
 class TodoController extends Controller
 {
     public function index()
     {
-        $todosdb = Todo::all();
-        $param = ['todo' => $todosdb, 'tag' => $tagdb, 'user' => $userdb];
-        return view('index', ['todos' => $param]);
+        $tododb = Todo::all();
+        $tagdb = Tag::all();
+        $userdb = User::all();
+        $index = ['tododb' => $tododb, 'userdb' => $userdb, 'tagdb' => $tagdb];
+        return view('/index', ['todos' => $index]);
     }
 
     public function create(TodoRequest $request)
     {
         $contents = $request->all();
         Todo::create($contents);
-        return redirect('/');
+        return redirect('/index');
     }
 
     public function update(TodoRequest $request)
@@ -28,7 +33,7 @@ class TodoController extends Controller
         $contents = $request->all();
         unset($contents['_token']);
         Todo::find($request->id)->update($contents);
-        return redirect('/');
+        return redirect('/index');
     }
 
     public function delete($id)
@@ -36,7 +41,7 @@ class TodoController extends Controller
         $contents = Todo::find($id);
         unset($contents['_token']);
         $contents->delete();
-        return redirect('/');
+        return redirect('/index');
     }
 
     public function check(Request $request)
