@@ -97,7 +97,7 @@
 <body>
   // ログインチェック
   @if (Auth::check())
-  <p>ログイン中ユーザー: {{$index->name . ' メール' . $index->email . ''}}</p>
+  <p>ログイン中ユーザー: {{$users->name . ' メール' . $users->email . ''}}</p>
   @else
   <p>
     ログインしてください（<a href="/login">ログイン</a>｜<a href="/register">登録</a>）

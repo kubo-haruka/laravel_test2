@@ -14,11 +14,11 @@ class TodoController extends Controller
 {
     public function index()
     {
-        $tododb = Todo::all();
-        $tagdb = Tag::all();
-        $userdb = User::all();
-        $index = ['todos' => $tododb, 'users' => $userdb, 'tags' => $tagdb];
-        return view('/index', ['index' => $index]);
+        $todos = Todo::all();
+        $tags = Tag::all();
+        $users = User::all();
+        $index = ['todos' => $todos, 'users' => $users, 'tags' => $tags];
+        return view('index', ['todos' => $todos, 'users' => $users, 'tags' => $tags]);
     }
 
     public function create(TodoRequest $request)
