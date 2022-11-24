@@ -102,7 +102,7 @@
   }
 
   button.create {
-    margin-left:10px;
+    margin-left: 10px;
     border-style: solid;
     padding: 8px 20px;
     background: none;
@@ -217,6 +217,7 @@
       <tr>
         <th>作成日</th>
         <th>タスク名</th>
+        <th>タグ</th>
         <th>更新</th>
         <th>削除</th>
       </tr>
@@ -227,6 +228,13 @@
           @csrf
           <td>
             <input name="contents" type="text" value="{{ $todo->contents }}">
+          </td>
+          <td>
+            <select class="form-control" id="tag-id" name="tag_id">
+              @foreach (Config::get('tag.tag_name') as $key => $val)
+              <option value="{{ $key }}">{{ $val }}</option>
+              @endforeach
+            </select>
           </td>
           <td>
             <button class="update" type="submit">更新</button>
