@@ -223,7 +223,7 @@
       @foreach($todos as $todo)
       <tr>
         <td>{{$todo->created_at}}</td>
-        <form action="{{ route('todo.update', ['id' => $todo->id]) }}" method="post">
+        <form action="{{ route('todo.update', ['id' => $todos>id]) }}" method="post">
           @csrf
           <td>
             <input name="contents" type="text" value="{{ $todo->contents }}">
