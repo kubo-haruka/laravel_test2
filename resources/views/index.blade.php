@@ -39,22 +39,25 @@
 
   .login {
     display: inline-block;
-    width: 70%;
+    width: 71%;
     text-align: right;
   }
 
   .login_name {
+    padding-right: 20px;
     display: inline-block;
-    width: 40%;
+    width: 48%;
     text-align: right;
   }
 
   .logout {
+    padding-left: -20px;
     display: inline-block;
-    width: 40%;
+    width: 28%;
   }
 
-  button.logout {
+  button.logout_btn {
+    width: 100%;
     border-style: solid;
     padding: 8px 20px;
     background: none;
@@ -63,21 +66,43 @@
     border-color: #ff0000;
   }
 
-  button.logout:hover {
+  button.logout_btn:hover {
     background-color: #ff0000;
     color: #fff;
   }
 
+  button.search_btn {
+    border-style: solid;
+    padding: 8px 20px;
+    background: none;
+    color: #b0f229;
+    border-radius: 5px;
+    border-color: #b0f229;
+  }
+
+  button.search_btn:hover {
+    background-color: #b0f229;
+    color: #fff;
+  }
+
   input.todo_create {
-    width: 450px;
+    width: 400px;
     height: 30px;
     border-style: solid;
     border-width: 1px;
     border-radius: 5px;
   }
 
+  .form-control {
+    width: 60px;
+    height: 35px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+  }
+
   button.create {
-    margin-left: 50px;
+    margin-left:10px;
     border-style: solid;
     padding: 8px 20px;
     background: none;
@@ -164,15 +189,26 @@
           </div>
           <div class="logout">
             <form action="/login" method="post">
-              <button class="logout" type="submit">ログアウト</button>
+              @csrf
+              <button class="logout_btn">ログアウト</button>
             </form>
           </div>
         </div>
       </div>
 
+      <form action="/search" method="post">
+        @csrf
+        <button class="search_btn">タスク検索</button>
+      </form>
+
       <form action="/create" method="post">
         @csrf
         <input name="contents" type="text" class="todo_create">
+        <select class="form-control" id="tag-id" name="tag_id">
+          @foreach (Config::get('tag.tag_name') as $key => $val)
+          <option value="{{ $key }}">{{ $val }}</option>
+          @endforeach
+        </select>
         <button class="create">追加</button>
       </form>
     </div>
