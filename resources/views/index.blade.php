@@ -227,7 +227,7 @@
         <form action="{{ route('todo.update', ['id' => $todos>id]) }}" method="post">
           @csrf
           <td>
-            <input name="contents" type="text" value="{{ $todo->contents }}">
+            <input name="contents" type="text" value="{{ $todo->contents ,$users_id->id}}">
           </td>
           <td>
             <select class="form-control" id="tag-id" name="tag_id">
