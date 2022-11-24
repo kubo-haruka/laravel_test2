@@ -23,8 +23,10 @@ class TodoController extends Controller
 
     public function create(TodoRequest $request)
     {
+        $user = Auth::user();
         $contents = $request->all();
         Todo::create($contents);
+        $user->users()->associate($request->input('user_id'));
         return redirect('/index');
     }
 
