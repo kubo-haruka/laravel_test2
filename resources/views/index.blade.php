@@ -21,18 +21,89 @@
     overflow: hidden;
   }
 
+  .todo {
+    display: inline-block;
+  }
+
+  .header {
+    width: 100%;
+  }
+
+  .title {
+    font-style: normal;
+    font-size: 30px;
+    font-weight: bold;
+    display: inline-block;
+    width: 28%;
+  }
+
+  .login {
+    display: inline-block;
+    width: 71%;
+    text-align: right;
+  }
+
+  .login_name {
+    padding-right: 20px;
+    display: inline-block;
+    width: 48%;
+    text-align: right;
+  }
+
+  .logout {
+    padding-left: -20px;
+    display: inline-block;
+    width: 28%;
+  }
+
+  button.logout_btn {
+    width: 100%;
+    border-style: solid;
+    padding: 8px 20px;
+    background: none;
+    color: #ff0000;
+    border-radius: 5px;
+    border-color: #ff0000;
+  }
+
+  button.logout_btn:hover {
+    background-color: #ff0000;
+    color: #fff;
+  }
+
+  button.search_btn {
+    border-style: solid;
+    padding: 8px 20px;
+    background: none;
+    color: #b0f229;
+    border-radius: 5px;
+    border-color: #b0f229;
+  }
+
+  button.search_btn:hover {
+    background-color: #b0f229;
+    color: #fff;
+  }
+
   input.todo_create {
-    width: 450px;
+    width: 400px;
     height: 30px;
     border-style: solid;
     border-width: 1px;
     border-radius: 5px;
   }
 
-  button.create {
-    margin-left: 50px;
+  .form-control {
+    width: 60px;
+    height: 35px;
     border-style: solid;
-    border-style: thin;
+    border-width: 1px;
+    border-radius: 5px;
+  }
+
+  button.create {
+    margin-left: 10px;
+    border-style: solid;
     padding: 8px 20px;
     background: none;
     color: #ff00ff;
@@ -60,7 +131,6 @@
 
   button.update {
     border-style: solid;
-    border-style: thin;
     padding: 8px 20px;
     background: none;
     color: #ffbf1c;
@@ -75,7 +145,6 @@
 
   button.delete {
     border-style: solid;
-    border-style: thin;
     padding: 8px 20px;
     background: none;
     color: #1cffbb;
@@ -95,16 +164,6 @@
 </style>
 
 <body>
-  // ログインチェック
-  @if (Auth::check())
-  <p>ログイン中ユーザー: {{$index->name . ' メール' . $index->email . ''}}</p>
-  @else
-  <p>
-    ログインしてください（<a href="/login">ログイン</a>｜<a href="/register">登録</a>）
-  </p>
-  @endif
-
-  // エラー
   @if (count($errors) > 0)
   <ul>
     @foreach ($errors->all() as $error)
@@ -115,10 +174,41 @@
 
   <div class="card">
     <div class="todo">
-      <h2>Todo List</h2>
+
+      <div class="header">
+        <p class="title">Todo List</p>
+        <div class="login">
+          <div class="login_name">
+            @if (Auth::check())
+            <p>「{{$user->name}}」でログイン中</p>
+            @else
+            <p>
+              ログインしてください（<a href="/login">ログイン</a>｜<a href="/register">登録</a>）
+            </p>
+            @endif
+          </div>
+          <div class="logout">
+            <form action="/login" method="post">
+              @csrf
+              <button class="logout_btn">ログアウト</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <form action="/search" method="post">
+        @csrf
+        <button class="search_btn">タスク検索</button>
+      </form>
+
       <form action="/create" method="post">
         @csrf
         <input name="contents" type="text" class="todo_create">
+        <select class="form-control" id="tag-id" name="tag_id">
+          @foreach (Config::get('tag.tag_name') as $key => $val)
+          <option value="{{ $key }}">{{ $val }}</option>
+          @endforeach
+        </select>
         <button class="create">追加</button>
       </form>
     </div>
@@ -127,16 +217,24 @@
       <tr>
         <th>作成日</th>
         <th>タスク名</th>
+        <th>タグ</th>
         <th>更新</th>
         <th>削除</th>
       </tr>
       @foreach($todos as $todo)
       <tr>
         <td>{{$todo->created_at}}</td>
-        <form action="{{ route('todo.update', ['id' => $todo->id]) }}" method="post">
+        <form action="{{ route('todo.update', ['id' => $todos>id]) }}" method="post">
           @csrf
           <td>
             <input name="contents" type="text" value="{{ $todo->contents }}">
+          </td>
+          <td>
+            <select class="form-control" id="tag-id" name="tag_id">
+              @foreach (Config::get('tag.tag_name') as $key => $val)
+              <option value="{{ $key }}">{{ $val }}</option>
+              @endforeach
+            </select>
           </td>
           <td>
             <button class="update" type="submit">更新</button>

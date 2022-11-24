@@ -14,11 +14,11 @@ class TodoController extends Controller
 {
     public function index()
     {
-        $tododb = Todo::all();
-        $tagdb = Tag::all();
-        $userdb = User::all();
-        $index = ['todos' => $tododb, 'users' => $userdb, 'tags' => $tagdb];
-        return view('/index', ['index' => $index]);
+        $user = Auth::user();
+        $todos = Todo::all();
+        $tags = Tag::all();
+        $users = User::all();
+        return view('index', ['todos' => $todos, 'users' => $users, 'tags' => $tags, 'user' => $user,]);
     }
 
     public function create(TodoRequest $request)
@@ -42,6 +42,11 @@ class TodoController extends Controller
         unset($contents['_token']);
         $contents->delete();
         return redirect('/index');
+    }
+
+    public function logout()
+    {
+        return redirect('/login');
     }
 
     public function check(Request $request)
