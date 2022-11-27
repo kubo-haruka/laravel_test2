@@ -18,15 +18,15 @@ class TodoController extends Controller
         $todos = Todo::all();
         $tags = Tag::all();
         $users = User::all();
-        return view('index', ['todos' => $todos, 'users' => $users, 'tags' => $tags, 'user' => $user,]);
+        return view('index', ['todos' => $todos, 'users' => $users, 'tags' => $tags, 'user' => $user]);
     }
 
     public function create(TodoRequest $request)
     {
         $user = Auth::user();
+        $user_id = $user->id;
         $contents = $request->all();
-        Todo::create($contents);
-        $user->users()->associate($request->input('user_id'));
+        Todo::create(['contents' => $contents, 'user' => $user_id]);
         return redirect('/index');
     }
 
